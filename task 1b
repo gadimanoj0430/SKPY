@@ -1,0 +1,13 @@
+import demoji
+
+# Initialize demoji to load the emoji database
+demoji.download_codes()
+
+# Example text containing emojis
+text_with_emojis = "I love 🐱 and 🐶"
+
+# Convert emojis to text
+text_without_emojis = demoji.replace(text_with_emojis)
+
+# Print the converted text
+print(text_without_emojis)
