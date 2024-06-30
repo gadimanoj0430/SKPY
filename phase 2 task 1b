@@ -1,0 +1,60 @@
+def flames_count(name1, name2):
+
+    name1 = name1.lower().replace(" ", "")
+    name2 = name2.lower().replace(" ", "")
+    
+    
+    count1 = {}
+    count2 = {}
+    
+    
+    for char in name1:
+        if char in count1:
+            count1[char] += 1
+        else:
+            count1[char] = 1
+    
+    
+    for char in name2:
+        if char in count2:
+            count2[char] += 1
+        else:
+            count2[char] = 1
+    
+    
+    common_count = 0
+    for char in count1:
+        if char in count2:
+            common_count += min(count1[char], count2[char])
+    
+    
+    total_count = len(name1) + len(name2) - 2 * common_count
+    
+    
+    flames = ['F', 'L', 'A', 'M', 'E', 'S']
+    while len(flames) > 1:
+        index = (total_count % len(flames)) - 1
+        if index >= 0:
+            flames = flames[index + 1:] + flames[:index]
+        else:
+            flames = flames[:len(flames) - 1]
+    
+    
+    result = {
+        'F': 'Friends',
+        'L': 'Love',
+        'A': 'Affection',
+        'M': 'Marriage',
+        'E': 'Enemy',
+        'S': 'Sibling'
+    }
+    
+    return result[flames[0]]
+
+
+if __name__ == "__main__":
+    name1 = input("Enter the first name: ")
+    name2 = input("Enter the second name: ")
+    
+    relationship = flames_count(name1, name2)
+    print(f"The relationship between {name1} and {name2} is {relationship}.")
