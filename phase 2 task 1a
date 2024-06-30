@@ -1,0 +1,72 @@
+class Book:
+    def __init__(self, title, author, publisher, price):
+        self._title = title
+        self._author = author
+        self._publisher = publisher
+        self._price = price
+        self._author_royalty = 0.0  # Initialize author's royalty to 0
+
+    
+    @property
+    def title(self):
+        return self._title
+    
+    @title.setter
+    def title(self, value):
+        self._title = value
+
+    
+    @property
+    def author(self):
+        return self._author
+    
+    @author.setter
+    def author(self, value):
+        self._author = value
+
+    
+    @property
+    def publisher(self):
+        return self._publisher
+    
+    @publisher.setter
+    def publisher(self, value):
+        self._publisher = value
+
+    
+    @property
+    def price(self):
+        return self._price
+    
+    @price.setter
+    def price(self, value):
+        self._price = value
+
+    
+    @property
+    def author_royalty(self):
+        return self._author_royalty
+
+    
+    def calculate_royalty(self, copies_sold):
+        if copies_sold <= 500:
+            self._author_royalty = 0.1 * self._price * copies_sold
+        elif copies_sold <= 1500:
+            first_500 = 0.1 * self._price * 500
+            next_1000 = 0.125 * self._price * (copies_sold - 500)
+            self._author_royalty = first_500 + next_1000
+        else:
+            first_500 = 0.1 * self._price * 500
+            next_1000 = 0.125 * self._price * 1000
+            beyond_1500 = 0.15 * self._price * (copies_sold - 1500)
+            self._author_royalty = first_500 + next_1000 + beyond_1500
+
+        return self._author_royalty
+
+    def __str__(self):
+        return f"Title: {self._title}, Author: {self._author}, Publisher: {self._publisher}, Price: {self._price}"
+
+
+book1 = Book("Python Programming", "John Doe", "Tech Books Inc.", 25.0)
+print(book1)
+print(f"Author's royalty for 1000 copies: ${book1.calculate_royalty(1000):.2f}")
