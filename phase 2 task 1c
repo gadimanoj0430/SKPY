@@ -1,0 +1,68 @@
+import turtle
+
+
+def draw_rectangle(color, width, height):
+    turtle.begin_fill()
+    turtle.fillcolor(color)
+    for _ in range(2):
+        turtle.forward(width)
+        turtle.right(90)
+        turtle.forward(height)
+        turtle.right(90)
+    turtle.end_fill()
+
+
+def draw_ashoka_chakra(radius):
+    turtle.color("navy")
+    turtle.penup()
+    turtle.goto(0, -radius)
+    turtle.pendown()
+    turtle.circle(radius)
+    
+    
+    for _ in range(24):
+        turtle.penup()
+        turtle.goto(0, 0)
+        turtle.pendown()
+        turtle.setheading(90)
+        turtle.right(_ * 15)  
+        turtle.forward(radius)
+        turtle.backward(radius)
+
+
+def draw_indian_flag():
+    turtle.speed(10)
+    
+    width = 450
+    height = 300
+    
+    
+    turtle.penup()
+    turtle.goto(-width/2, height/2)
+    turtle.pendown()
+    draw_rectangle((255, 153, 51), width, height/3)
+    
+    
+    turtle.penup()
+    turtle.goto(-width/2, height/6)
+    turtle.pendown()
+    draw_rectangle("white", width, height/3)
+    
+    
+    turtle.penup()
+    turtle.goto(-width/2, -height/6)
+    turtle.pendown()
+    draw_rectangle((19, 136, 8), width, height/3)
+    
+    
+    turtle.penup()
+    turtle.goto(0, height/12)
+    turtle.pendown()
+    draw_ashoka_chakra(height/6)
+
+    turtle.hideturtle()
+    turtle.done()
+
+
+turtle.colormode(255)  
+draw_indian_flag()
